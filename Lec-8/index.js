@@ -3,7 +3,7 @@ const app = express();
 
 
 app.get('/', (req, res) => {
-  res.se1nd('<h1>Welcome to the Home Page</h1>'); //response header set hota hai
+  res.send('<h1>Welcome to the Home Page</h1>'); //response header set hota hai
   res.send("Hello World");
   res.sendFile(__dirname + '/index.html');
   res.json({
