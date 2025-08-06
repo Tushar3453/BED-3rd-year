@@ -1,14 +1,1 @@
-[
-    {
-        "id":"1",
-        "name":"Tushar",
-        "username": "Tushar3147",
-        "role":"admin"
-    },
-    {
-        "id":"2",
-        "name":"Bukhaar",
-        "username": "Bukhaar3147",
-        "role":"user"
-    }
-]
+[{"id":"1","name":"Tushar","username":"Tushar3147","role":"admin"},{"id":"2","name":"Bukhaar","username":"Bukhaar3147","role":"user"},{"id":90290,"name":"sucha","username":"sucha3147","role":"user"}]
