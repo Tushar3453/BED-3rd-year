@@ -6,7 +6,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static(__dirname+"/public"))
 app.use(express.json())
 app.get('/users', (req, res) => {
-  fs.readFile("./Lec-14/users1.json","utf-8",function(err,data){
+  fs.readFile("./Lec-15/users1.json","utf-8",function(err,data){
     if(err) res.send(err);
     let allusers=JSON.parse(data);
     res.json(allusers);
@@ -25,16 +25,22 @@ app.post("/adduser",(req,res)=>{
   }
 
   let alluser=[];
-  let data=fs.readFileSync("./Lec-14/users1.json","utf-8");
+  let data=fs.readFileSync("./Lec-15/users1.json","utf-8");
   if(data){
     alluser=JSON.parse(data);
   }
   alluser.push(newUser);
-  fs.writeFileSync("./Lec-14/users1.json",JSON.stringify(alluser))
-  res.send("user added")
+  fs.writeFileSync("./Lec-15/users1.json",JSON.stringify(alluser))
+  res.json({
+    success: true,
+    data: alluser,
+  })
 
   } catch (error) {
-    return res.send(error)
+    return res.send({
+      success: false,
+      error:"something went wrong while adding user",
+    })
   }
 })
 

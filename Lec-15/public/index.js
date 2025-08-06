@@ -55,6 +55,16 @@ function addUser(name,username,URL){
     })
     .then((data)=>{
         console.log(data)
+        if(data.success){
+            alert("user registered successfully")
+            nameInput.value="";
+            userNameInput.value="";
+        }
+        else{
+            alert(data.error)
+            nameInput.value="";
+            userNameInput.value="";
+        }
     })
 }
 registerform.addEventListener("submit",function(e){
