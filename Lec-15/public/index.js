@@ -66,6 +66,10 @@ function addUser(name,username,URL){
             userNameInput.value="";
         }
     })
+    .catch((err)=>{
+        console.err("error adding user",err);
+        alert("failed to add user please try again");
+    })
 }
 registerform.addEventListener("submit",function(e){
     e.preventDefault();
