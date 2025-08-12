@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
+const blog=require("./blog")
 
 const user = new schema({
     email: {
@@ -15,7 +16,11 @@ const user = new schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    blogs:[{
+        type:mongoose.Types.ObjectId,
+        ref:"Blog"
+    }]
 })
 
 module.exports = mongoose.model('User', user)
