@@ -1,7 +1,6 @@
 const Blogs = require("../model/blog");
 const User = require("../model/user"); 
 
-// Add Blog
 module.exports.postaddBlog = async (req, res) => {
     try {
         const { title, body, userId } = req.body;
@@ -33,7 +32,6 @@ module.exports.postaddBlog = async (req, res) => {
     }
 };
 
-// Get all blogs
 module.exports.getreadBlog = async (req, res) => {
     const allblog = await Blogs.find();
     res.json({
@@ -42,7 +40,6 @@ module.exports.getreadBlog = async (req, res) => {
     });
 };
 
-// Get one blog
 module.exports.getOneBlog = async (req, res) => {
     const { id } = req.params;
     const blog = await Blogs.findById(id);
@@ -52,7 +49,6 @@ module.exports.getOneBlog = async (req, res) => {
     });
 };
 
-// Delete blog
 module.exports.deleteOneBlog = async (req, res) => {
     try {
         const { blogId } = req.params;

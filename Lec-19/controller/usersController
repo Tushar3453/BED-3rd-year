@@ -1,6 +1,5 @@
 const Users = require("../model/user");
 
-// Create new user
 module.exports.createUser = async (req, res) => {
     try {
         const { email, username, password } = req.body;
@@ -26,7 +25,6 @@ module.exports.createUser = async (req, res) => {
     }
 };
 
-// Get all users
 module.exports.getAllUsers = async (req, res) => {
     try {
         const allUsers = await Users.find();
@@ -42,7 +40,6 @@ module.exports.getAllUsers = async (req, res) => {
     }
 };
 
-// Get one user with blogs populated
 module.exports.getOneUser = async (req, res) => {
     try {
         const { id } = req.params;
