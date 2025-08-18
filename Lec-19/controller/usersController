@@ -1,0 +1,68 @@
+const Users = require("../model/user");
+
+// Create new user
+module.exports.createUser = async (req, res) => {
+    try {
+        const { email, username, password } = req.body;
+
+        const newUser = new Users({
+            email,
+            username,
+            password
+        });
+
+        await newUser.save();
+
+        res.json({
+            success: true,
+            data: newUser,
+            message: "User created successfully"
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
+};
+
+// Get all users
+module.exports.getAllUsers = async (req, res) => {
+    try {
+        const allUsers = await Users.find();
+        res.json({
+            success: true,
+            data: allUsers
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
+};
+
+// Get one user with blogs populated
+module.exports.getOneUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userExist = await Users.findById(id).populate("blogs");
+
+        if (!userExist) {
+            return res.json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            data: userExist
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
+};
