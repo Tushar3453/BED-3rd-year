@@ -10,7 +10,7 @@ async function addUser(email, name, password) {
     })
     return user
 }
-// addUser("chaudharytur270@gmail.com", "Tuar", "124")
+// addUser("sm@gmail.com", "smiley", "1234")
 //     .then((data) => {
 //         console.log(data);
 //     })
@@ -27,7 +27,7 @@ async function addTweet(content,userId){
         
     })
 }
-// addTweet("my first tweet",1)
+// addTweet("my second",6)
 // .then(()=> console.log("tweet added successfully"))
 // .catch((err)=>console.log(err.message));
 
@@ -40,8 +40,8 @@ async function getUserTweet(userId){
     
     })
     return tweets;
-}
-// getUserTweet(1)
+}+
+// getUserTweet(6)
 // .then((data)=>console.log(data))
 // .catch((err)=>console.log(err.message));
 
@@ -69,7 +69,51 @@ async function updateTweet(tweetId,userId,updatedContent){
     })
 
 }
-updateTweet("1","1","update tweet")
-.then(()=>{
-    console.log("tweet updated successfully")
-})
+// updateTweet("1","1","update tweet")
+// .then(()=>{
+//     console.log("tweet updated successfully")
+// })
+
+//create a function to delete user by id;
+async function deleteUser(userId) {
+    const user = await prisma.user.findUnique({
+        where: { id: Number(userId) }
+    });
+    if (!user) {
+        return "user not found";
+    }
+    await prisma.tweet.deleteMany({
+        where: { userId: Number(userId) }
+    });
+    await prisma.user.delete({
+        where: { id: Number(userId) }
+    });
+    return "User deleted successfully";
+    
+}
+// deleteUser(3)
+// .then((data)=>console.log(data))
+// .catch((err)=>console.log(err.message))
+
+async function getUsers() {
+    const users = await prisma.user.findMany({
+        // select: {
+        //     name: true,
+        //     email: true,
+        //     tweet: {
+        //         content:true
+        //     }
+        // }
+        include:{
+        tweet:{
+            select:{
+                content:true
+            }
+        }
+    }
+    });
+    return users;
+}
+getUsers()
+.then((data)=>console.log(JSON.stringify(data,null,2)))
+.catch((err)=>console.log(err.message))
