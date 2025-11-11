@@ -1,5 +1,5 @@
-const Blogs = require("../model/blog");
-const User = require("../model/user"); 
+const Blogs = require("../model/blog"); 
+const User = require("../model/user");
 
 module.exports.postaddBlog = async (req, res) => {
     try {
@@ -33,20 +33,28 @@ module.exports.postaddBlog = async (req, res) => {
 };
 
 module.exports.getreadBlog = async (req, res) => {
-    const allblog = await Blogs.find();
-    res.json({
-        success: true,
-        data: allblog
-    });
+    try {
+        const allblog = await Blogs.find();
+        res.json({
+            success: true,
+            data: allblog
+        });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
 };
 
 module.exports.getOneBlog = async (req, res) => {
-    const { id } = req.params;
-    const blog = await Blogs.findById(id);
-    res.json({
-        success: true,
-        data: blog
-    });
+    try {
+        const { id } = req.params;
+        const blog = await Blogs.findById(id);
+        res.json({
+            success: true,
+            data: blog
+        });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
 };
 
 module.exports.deleteOneBlog = async (req, res) => {

@@ -8,9 +8,10 @@
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "description": "",
   "dependencies": {
     "express": "^5.1.0",
     "mongoose": "^8.17.1"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }

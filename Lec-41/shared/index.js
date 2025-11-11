@@ -12,7 +12,7 @@ subscriber.connect()
     console.log("subscriber connected")
 })
 
-module.exports({
+module.exports={
     publisher,
     subscriber
-})
+}

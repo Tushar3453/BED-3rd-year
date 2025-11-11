@@ -9,10 +9,10 @@ async function addUser(email,name,password){
         }
     })
 }
-// addUser("chaudharytushar270@gmail.com","Tushar","1234")
-// .then(()=>{
-//     console.log("user added successfully!!")
-// })
+addUser("chaudharytushar270@gmail.com","Tushar","1234")
+.then(()=>{
+    console.log("user added successfully!!")
+})
 
 async function getAllUser(){
     let allUser=await prisma.user.findMany();
