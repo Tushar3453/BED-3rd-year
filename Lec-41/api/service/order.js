@@ -189,9 +189,14 @@ class OrderBook {
       lastUpdated: Date.now(),
       bids: this.bids.map((o) => [o.price, o.remainQty]),
       ask: this.ask.map((o) => [o.price, o.remainQty]),
-      lastTradedPrice: this.lastTradedPrice,
+      // lastTradedPrice: this.lastTradedPrice,
     };
   }
+
+  getRecentTrades(limit){
+    return this.trades.slice(0,limit);
+  }
 }
+
 
 module.exports = OrderBook;

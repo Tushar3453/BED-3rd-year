@@ -23,3 +23,10 @@ module.exports.getOrderbook=async (req,res)=>{
     return res.json(bookSnapshot);
         
 }
+
+module.exports.getRecentTrades=async (req,res)=>{
+    let {limit}=req.query;
+    let recentTrades=ob.getRecentTrades(limit);
+    return res.json(recentTrades);
+        
+}
