@@ -5,6 +5,7 @@ class OrderBook {
     this.ask = []; // SELL orders
     this._nextId = 1;
     this.lastTradedPrice = null;
+    this.trades=[]
   }
 
   // helper
@@ -74,13 +75,21 @@ class OrderBook {
 
       while (order.remainQty > 0 && asksArr.length > 0) {
         let top = asksArr[0];
-        let fillQty = Math.min(order.remainQty, top.remainQty);
+        let orderFill = Math.min(order.remainQty, top.remainQty);
+        if(orderFill>0){
+          this.lastTradedPrice=top.price;
+          this.trades.push({
+            id:Math.floor(Math.random()*1000000),
+            quantity:orderFill,
+            price:top.price
+          })
+        } 
 
-        order.exectQty += fillQty;
-        order.remainQty -= fillQty;
+        order.exectQty += orderFill;
+        order.remainQty -= orderFill;
 
-        top.exectQty += fillQty;
-        top.remainQty -= fillQty;
+        top.exectQty += orderFill;
+        top.remainQty -= orderFill;
 
         this.lastTradedPrice = top.price;
 

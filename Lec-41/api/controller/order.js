@@ -17,3 +17,9 @@ module.exports.postPlaceOrder=async (req,res)=>{
     })
 
 }
+
+module.exports.getOrderbook=async (req,res)=>{
+    let bookSnapshot=ob.getBookSnapShot();
+    return res.json(bookSnapshot);
+        
+}
