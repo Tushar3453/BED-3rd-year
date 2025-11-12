@@ -3,6 +3,9 @@ let ob=new OrderBook("BTCUSD"); //global object
 const { publisher } = require("../../shared/index");
 
 module.exports.postPlaceOrder=async (req,res)=>{
+    let {symbol} = req.query;
+    let ob=OrderBook.getOrderbook(symbol);    
+
     let{side,type,price,quantity,user}=req.body;
     let response=ob.placeOrder(side,type,price,quantity,user);
     const book = ob.getBookSnapShot();
@@ -19,13 +22,16 @@ module.exports.postPlaceOrder=async (req,res)=>{
 }
 
 module.exports.getOrderbook=async (req,res)=>{
+    let {symbol}=req.query;
+    let ob=OrderBook.getOrderbook(symbol);
     let bookSnapshot=ob.getBookSnapShot();
     return res.json(bookSnapshot);
         
 }
 
 module.exports.getRecentTrades=async (req,res)=>{
-    let {limit}=req.query;
+    let {limit,symbol}=req.query;
+    let ob=OrderBook.getOrderbook(symbol);    
     let recentTrades=ob.getRecentTrades(limit);
     return res.json(recentTrades);
         

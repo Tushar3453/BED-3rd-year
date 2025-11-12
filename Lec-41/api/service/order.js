@@ -1,11 +1,20 @@
 class OrderBook {
-  constructor(symbol = "BTCUSD") {
+  multipleMarket=new Map();
+  constructor(symbol) {
     this.symbol = symbol;
     this.bids = []; // BUY orders
     this.ask = []; // SELL orders
     this._nextId = 1;
     this.lastTradedPrice = null;
     this.trades=[]
+  }
+
+  static getOrderbook(symbol){
+    if(!multipleMarket.has(symbol)){
+      let orderBook=new OrderBook(symbol);
+      multipleMarket.set(symbol,orderBook);
+    }
+    return multipleMarket.get(symbol);
   }
 
   // helper
